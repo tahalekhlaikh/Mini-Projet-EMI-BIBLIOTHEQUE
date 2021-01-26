@@ -1,0 +1,48 @@
+﻿@model gestionDeBiblio.Models.Pret
+
+@{
+    ViewBag.Title = "Libérer Prêt";
+}
+
+<h2>Libérer</h2>
+
+<h3>Vous êtes sûr de vouloir libérer ce prêt ?</h3>
+<div>
+    <h4>Pret</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.emprunteur.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emprunteur.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.leLivrePrete.titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leLivrePrete.titre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Libérer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste", "Index")
+        </div>
+    }
+</div>

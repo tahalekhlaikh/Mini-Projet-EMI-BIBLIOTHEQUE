@@ -1,0 +1,52 @@
+﻿@model IEnumerable<gestionDeBiblio.Models.Livre>
+
+@{
+    ViewBag.Title = "Livres";
+}
+
+<h2>Gestion des livres</h2>
+
+<p>
+    @Html.ActionLink("Créer un nouveau livre", "Create")
+    @using (Html.BeginForm("Index", "Livres", FormMethod.Get))
+    {
+    <p>
+        Titre: @Html.TextBox("Titre")
+        Auteur: @Html.TextBox("Auteur")
+        <input type="submit" value="Chercher" class="btn btn-default" />
+    </p> }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.titre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.auteur)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.titre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.auteur)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

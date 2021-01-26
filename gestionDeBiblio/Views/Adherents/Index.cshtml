@@ -1,0 +1,52 @@
+﻿@model IEnumerable<gestionDeBiblio.Models.Adherent>
+
+@{
+    ViewBag.Title = "Adherents";
+}
+
+<h2>Gestion des adherents</h2>
+
+<p>
+    @Html.ActionLink("Créer un nouvel adherent", "Create")
+
+    @using (Html.BeginForm("Index", "Adherents", FormMethod.Get))
+    {
+       <p> Nom: @Html.TextBox("Nom")
+           Prénom: @Html.TextBox("Prenom")
+    <input type="submit" value="Chercher" class="btn btn-default" />
+    </p> }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prenom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prenom)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<gestionDeBiblio.Models.Pret>
+
+@{
+    ViewBag.Title = "Prêts";
+}
+
+<h2>Gestion des prêts</h2>
+
+<p>
+    @Html.ActionLink("Créer un nouveau prêt", "Create")
+    @using (Html.BeginForm("Index", "Prets", FormMethod.Get))
+    {
+    <p>
+        Nom de l'adhérent: @Html.TextBox("Nom")
+        Titre du livre: @Html.TextBox("Titre")
+        <input type="submit" value="Chercher" class="btn btn-default" />
+    </p> }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emprunteur.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emprunteur.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emprunteur.prenom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leLivrePrete.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leLivrePrete.titre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            Etat
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emprunteur.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emprunteur.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emprunteur.prenom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.leLivrePrete.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.leLivrePrete.titre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        @if (DateTime.Compare(item.getDateRetour().Date,DateTime.Now.Date)>0) {
+        <td style="color:green">
+            Prêt en cours
+        </td>}
+        else
+        {
+            <td style="color:red">
+                Délai dépassé
+            </td>}
+             
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Libérer", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

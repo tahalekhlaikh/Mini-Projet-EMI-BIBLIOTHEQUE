@@ -1,0 +1,69 @@
+﻿@model gestionDeBiblio.Models.Livre
+
+@{
+    ViewBag.Title = "Détails Livre";
+    var liste= ViewBag.emprunteurs;
+}
+
+<h2>Détails</h2>
+
+<div>
+    <h4>Livre</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.auteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.auteur)
+        </dd>
+
+    </dl>
+    <hr />
+    <h4>Liste des adherents emprunteurs</h4>
+    <table class="table">
+        <tr>
+            <th>
+                Nom
+            </th>
+            <th>
+                Prénom
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in liste)
+        {
+            <tr>
+                <td>
+                    @item.nom
+                </td>
+                <td>
+                    @item.prenom
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Retour à la liste", "Index")
+</p>
